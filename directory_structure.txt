@@ -1,0 +1,84 @@
+.
+├── README.md
+├── data
+│   ├── test
+│   │   ├── BRACELET
+│   │   ├── EARRINGS
+│   │   ├── NECKLACE
+│   │   ├── RINGS
+│   │   └── WRISTWATCH
+│   ├── train
+│   │   ├── BRACELET
+│   │   ├── EARRINGS
+│   │   ├── NECKLACE
+│   │   ├── RINGS
+│   │   └── WRISTWATCH
+│   └── val
+├── directory_structure.txt
+├── jewelry_bot_env
+│   ├── bin
+│   │   ├── activate
+│   │   ├── activate.csh
+│   │   ├── activate.fish
+│   │   ├── activate.nu
+│   │   ├── activate.ps1
+│   │   ├── activate_this.py
+│   │   ├── f2py
+│   │   ├── flask
+│   │   ├── fonttools
+│   │   ├── import_pb_to_tensorboard
+│   │   ├── markdown-it
+│   │   ├── markdown_py
+│   │   ├── normalizer
+│   │   ├── pip
+│   │   ├── pip3
+│   │   ├── pip3.12
+│   │   ├── pyftmerge
+│   │   ├── pyftsubset
+│   │   ├── pygmentize
+│   │   ├── python -> /opt/homebrew/opt/python@3.12/bin/python3.12
+│   │   ├── python3 -> python
+│   │   ├── python3.12 -> python
+│   │   ├── saved_model_cli
+│   │   ├── tensorboard
+│   │   ├── tf_upgrade_v2
+│   │   ├── tflite_convert
+│   │   ├── toco
+│   │   ├── toco_from_protos
+│   │   ├── tree-cli
+│   │   ├── ttx
+│   │   └── wheel
+│   ├── lib
+│   │   └── python3.12
+│   ├── pyvenv.cfg
+│   └── share
+│       └── man
+├── logs
+├── models
+│   └── jewelry_classifier.h5
+├── notebooks
+│   └── Exploratory_Data_Analysis.ipynb
+├── scripts
+│   ├── __pycache__
+│   │   ├── data_preprocessing.cpython-312.pyc
+│   │   ├── image_search.cpython-312.pyc
+│   │   └── train_model.cpython-312.pyc
+│   ├── continuous_learning.py
+│   ├── data_preprocessing.py
+│   ├── image_search.py
+│   ├── train_model.py
+│   └── train_script.py
+└── web_interface
+    ├── app.py
+    ├── static
+    │   └── styles.css
+    ├── templates
+    │   └── index.html
+    └── uploads
+
+30 directories, 47 files
+
+
+##CODE TO PRINT directory_structure
+
+tree -L 3 > directory_structure.txt
