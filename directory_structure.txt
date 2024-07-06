@@ -14,6 +14,11 @@
 │   │   ├── RINGS
 │   │   └── WRISTWATCH
 │   └── val
+│       ├── BRACELET
+│       ├── EARRINGS
+│       ├── NECKLACE
+│       ├── RINGS
+│       └── WRISTWATCH
 ├── directory_structure.txt
 ├── jewelry_bot_env
 │   ├── bin
@@ -27,6 +32,7 @@
 │   │   ├── flask
 │   │   ├── fonttools
 │   │   ├── import_pb_to_tensorboard
+│   │   ├── kaggle
 │   │   ├── markdown-it
 │   │   ├── markdown_py
 │   │   ├── normalizer
@@ -40,11 +46,13 @@
 │   │   ├── python3 -> python
 │   │   ├── python3.12 -> python
 │   │   ├── saved_model_cli
+│   │   ├── slugify
 │   │   ├── tensorboard
 │   │   ├── tf_upgrade_v2
 │   │   ├── tflite_convert
 │   │   ├── toco
 │   │   ├── toco_from_protos
+│   │   ├── tqdm
 │   │   ├── tree-cli
 │   │   ├── ttx
 │   │   └── wheel
@@ -76,9 +84,7 @@
     │   └── index.html
     └── uploads
 
-30 directories, 47 files
+35 directories, 50 files
 
-
-##CODE TO PRINT directory_structure
 
 tree -L 3 > directory_structure.txt

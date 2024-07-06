@@ -1,34 +1,60 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f8f9fa;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
 }
 
 .container {
-    text-align: center;
-    background: #fff;
-    padding: 2em;
-    border-radius: 10px;
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.section {
+    margin-bottom: 20px;
 }
 
 button {
     padding: 10px 20px;
-    margin: 10px;
+    background: #007bff;
+    color: white;
     border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background: #0056b3;
 }
 
-input[type="file"] {
-    margin: 10px 0;
+pre {
+    background: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #ddd;
+    overflow: auto;
+    max-height: 300px;
+}
+
+#drop-area {
+    border: 2px dashed #007bff;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+#drop-area.highlight {
+    border-color: #0056b3;
+}
+
+#gallery img {
+    width: 100px;
+    margin: 10px;
 }

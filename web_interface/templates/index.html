@@ -3,22 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jewelry Bot Interface</title>
+    <title>Jewelry Bot</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Jewelry Classification Bot</h1>
-        <form action="/train" method="post">
-            <button type="submit">Train Model</button>
-        </form>
-        <form action="/predict" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*" required>
-            <button type="submit">Predict</button>
-        </form>
-        {% if prediction %}
-        <h2>Prediction: {{ prediction }}</h2>
-        {% endif %}
+        <h1>Jewelry Bot</h1>
+        <div class="section">
+            <h2>Train Model</h2>
+            <form action="{{ url_for('train') }}" method="post">
+                <button type="submit">Start Training</button>
+            </form>
+            <div id="training-log"></div>
+        </div>
+        <div class="section">
+            <h2>Predict Jewelry Type</h2>
+            <div id="drop-area">
+                <form class="my-form">
+                    <p>Drag and drop images here or <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)"></p>
+                </form>
+                <div id="gallery"></div>
+            </div>
+            <div id="prediction-result"></div>
+        </div>
     </div>
+    <script>
+        let dropArea = document.getElementById('drop-area')
+
+        // Prevent default drag behaviors
+        ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false)
+            document.body.addEventListener(eventName, preventDefaults, false)
+        })
+
+        // Highlight drop area when item is dragged over it
+        ;['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false)
+        })
+
+        ;['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false)
+        })
+
+        // Handle dropped files
+        dropArea.addEventListener('drop', handleDrop, false)
+
+        function preventDefaults(e) {
+            e.preventDefault()
+            e.stopPropagation()
+        }
+
+        function highlight(e) {
+            dropArea.classList.add('highlight')
+        }
+
+        function unhighlight(e) {
+            dropArea.classList.remove('highlight')
+        }
+
+        function handleDrop(e) {
+            let dt = e.dataTransfer
+            let files = dt.files
+
+            handleFiles(files)
+        }
+
+        function handleFiles(files) {
+            files = [...files]
+            files.forEach(uploadFile)
+            files.forEach(previewFile)
+        }
+
+        function uploadFile(file) {
+            let url = '{{ url_for('predict') }}'
+            let formData = new FormData()
+
+            formData.append('file', file)
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                let resultDiv = document.getElementById('prediction-result')
+                resultDiv.innerHTML += `<p>${file.name}: ${data.prediction}</p>`
+            })
+            .catch(() => { console.log('Upload failed') })
+        }
+
+        function previewFile(file) {
+            let reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onloadend = function() {
+                let img = document.createElement('img')
+                img.src = reader.result
+                document.getElementById('gallery').appendChild(img)
+            }
+        }
+
+        function fetchTrainingLog() {
+            fetch('{{ url_for('train_status') }}')
+                .then(response => response.json())
+                .then(data => {
+                    const logDiv = document.getElementById('training-log')
+                    logDiv.innerHTML = '<h3>Training Log</h3><pre>' + data.join('\n') + '</pre>'
+                })
+        }
+        setInterval(fetchTrainingLog, 5000)
+    </script>
 </body>
 </html>
